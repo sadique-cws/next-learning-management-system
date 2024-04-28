@@ -1,9 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Course } from "@prisma/client";
-import { ColumnDef } from "@tanstack/react-table";
-
 import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -25,9 +22,7 @@ export const columns = [
             return (
                 <Button
                     variant="ghost"
-                    onClick={() =>
-                        column.toggleSorting(column.getIsSorted() === "asc")
-                    }
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Title
                     <ArrowUpDown className="ml-2 h-4 w-4" />
