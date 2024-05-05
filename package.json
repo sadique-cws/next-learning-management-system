@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.1",
+    "@clerk/nextjs": "^4.25.3",
     "@hello-pangea/dnd": "^16.6.0",
     "@hookform/resolvers": "^3.3.4",
     "@mux/mux-node": "^8.5.0",
@@ -29,6 +29,7 @@
     "@uploadthing/react": "^6.4.4",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
+    "clerk": "^0.8.3",
     "clsx": "^2.1.0",
     "cmdk": "^0.2.0",
     "lucide-react": "^0.372.0",
@@ -41,6 +42,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.1.0",
     "react-quill": "^2.0.0",
+    "stripe": "^15.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.9.0",

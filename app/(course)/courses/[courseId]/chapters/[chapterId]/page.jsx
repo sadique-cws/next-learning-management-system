@@ -1,11 +1,13 @@
 import { getChapter } from "@/actions/get-chapter";
 import Banner from "@/components/banner";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { VideoPlayer } from "./_components/video-player";
 import { Separator } from "@/components/ui/separator";
 import Preview from "@/components/preview";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
+import { File } from "lucide-react";
+import { CourseProgressButton } from "./_components/course-progress-button";
 
 const ChapterIdPage = async ({ params }) => {
 
@@ -28,7 +30,6 @@ const ChapterIdPage = async ({ params }) => {
     courseId: params.courseId
   })
 
-  console.log("attach",attachments);
 
   if (!chapter || !course) {
     return redirect("/");
@@ -70,11 +71,16 @@ const ChapterIdPage = async ({ params }) => {
             </h2>
             {
               purchase ? (
-                <div>
-              // todo add CourseProgress Button
-                </div>
+                <CourseProgressButton
+                  chapterId={params.chapterId}
+                  courseId={params.courseId}
+                  nextChapterId={nextChapter?.id}
+                  isCompleted={!!userProgress?.isCompleted}
+                />
+                  
+                
               ) : (
-                <CourseEnrollButton price={course.price} />
+                <CourseEnrollButton price={course.price} courseId={params.courseId} />
               )
             }
           </div>
@@ -83,7 +89,7 @@ const ChapterIdPage = async ({ params }) => {
           <div>
             <Preview value={chapter.description} />
           </div>
-          {!attachments.length && (
+          {!!attachments.length && (
             <>
               <Separator />
               <div className="p-4">

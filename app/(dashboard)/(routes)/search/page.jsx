@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { Categories } from "./_components/categories";
 import { getCourses } from "@/actions/get-courses";
 import CoursesList from "@/components/courses-list";
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 
 const search = async ({searchParams}) => {
     const {userId} = auth();
