@@ -13,7 +13,7 @@ const CoursesList = ({ items }) => {
         imageUrl={item.imageUrl} 
         chaptersLength={item.chapters.length}
         price={item.price}
-        progress={item.progress}
+        progress={(item.progress) || null}
         category={item.category.name} />
       ))} 
     </div>

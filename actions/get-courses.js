@@ -9,7 +9,34 @@ export const getCourses = async ({
     categoryId,
 }) => {
     try {
-      
+        
+        if(!userId){
+            const courses = await db.course.findMany({
+                where: {
+                    isPublished: true,
+                    title: {
+                        contains: title,
+                    },
+                    categoryId,
+                },
+                include: {
+                    category: true,
+                    chapters: {
+                        where: {
+                            isPublished: true,
+                        },
+                        select: {
+                            id: true,
+                        },
+                    },
+                },
+                orderBy: {
+                    createdAt: "desc",
+                },
+            });
+
+            return courses;
+        }
         const courses = await db.course.findMany({
             where: {
                 isPublished: true,
@@ -38,8 +65,6 @@ export const getCourses = async ({
                 createdAt: "desc",
             },
         });
-
-    
         const coursesWithProgress =
             await Promise.all(
                 courses.map(async (course) => {

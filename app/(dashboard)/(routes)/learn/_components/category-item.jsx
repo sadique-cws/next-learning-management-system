@@ -20,7 +20,7 @@ export const CategoryItem = ({label, value, icon:Icon}) => {
     const onClick = () => {
         const url = queryString.stringifyUrl(
             {
-                url: pathname,
+                url: (pathname != "/") ? pathname : "/learn",
                 query: {
                     title: currentTitle,
                     categoryId: isSelected ? null : value,

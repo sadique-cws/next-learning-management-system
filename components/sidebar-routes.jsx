@@ -13,7 +13,7 @@ const STUDENTRoutes = [
     {
         icon: Compass,
         label: "Browse",
-        href: "/search",
+        href: "/learn",
     }
 ]
 

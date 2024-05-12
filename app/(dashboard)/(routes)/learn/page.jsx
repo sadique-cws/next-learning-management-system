@@ -15,7 +15,7 @@ const search = async ({searchParams}) => {
     const courses = await getCourses({userId, ...searchParams})
 
     return ( 
-        <div>
+        <div className="p-3">
             <Categories items={category}/>
             <CoursesList items={courses}/>
         </div>
