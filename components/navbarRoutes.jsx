@@ -5,8 +5,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { BarChart, GraduationCap, Home, LogOut, User } from 'lucide-react'
 import { Button } from './ui/button'
-import { isAdmin } from '@/lib/admin'
-import { FcAbout } from 'react-icons/fc'
+import { isTeacher } from '@/lib/teacher'
 
 const NavbarRoutes = () => {
 
@@ -14,7 +13,7 @@ const NavbarRoutes = () => {
 
   const pathname = usePathname();
 
-  const isAdminPage = pathname?.startsWith('/admin');
+  const isTeacherPage = pathname?.startsWith('/admin');
   const isPlayerPage = pathname?.includes('/chapter');
   const isSearchPage = pathname === "/search";
   
@@ -48,14 +47,14 @@ const NavbarRoutes = () => {
           </SignedOut>
           <SignedIn>
           {
-          isAdminPage || isPlayerPage ? (
+          isTeacherPage || isPlayerPage ? (
             <Link href="/">
               <Button size="sm" variant="ghost">
                 <LogOut className='w-4 h-4 mr-2' />
                 Exit
               </Button>
             </Link>
-          ) : isAdmin(userId) ? (
+          ) : isTeacher(userId) ? (
             <Link href="/admin/courses">
               <Button size="sm" variant="ghost">
                 <User className='w-4 h-4 mr-2' />

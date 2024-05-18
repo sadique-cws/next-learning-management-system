@@ -49,7 +49,7 @@ model course {
   isPublished Boolean  @default(false)
   categoryId  String?
   createdAt   DateTime @default(now())
-  updateAt    DateTime
+  updatedAt   DateTime
 
   @@index([categoryId], map: "Course_categoryId_idx")
   @@fulltext([title], map: "Course_title_idx")
