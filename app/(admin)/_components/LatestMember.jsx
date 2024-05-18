@@ -6,6 +6,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { clerkClient } from "@clerk/nextjs"
 import { ChevronDown } from "lucide-react"
+import Link from "next/link"
 
 
 const UserItems = ({imageUrl,firstName, lastName, emailAddresses}) => (
@@ -23,39 +24,21 @@ const UserItems = ({imageUrl,firstName, lastName, emailAddresses}) => (
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" className="ml-auto">
-                Owner{" "}
+                Options{" "}
                 <ChevronDown className="ml-2 h-4 w-4 text-muted-foreground" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0" align="end">
               <Command>
-                <CommandInput placeholder="Select new role..." />
                 <CommandList>
-                  <CommandEmpty>No roles found.</CommandEmpty>
                   <CommandGroup>
-                    <CommandItem className="teamaspace-y-1 flex flex-col items-start px-4 py-2">
-                      <p>Viewer</p>
+                    <CommandItem >
+                      <Link href="" className="teamaspace-y-1 flex flex-col items-start px-4 py-2">
+                      <p>View Details</p>
                       <p className="text-sm text-muted-foreground">
-                        Can view and comment.
+                        Can view Course Details.
                       </p>
-                    </CommandItem>
-                    <CommandItem className="teamaspace-y-1 flex flex-col items-start px-4 py-2">
-                      <p>Developer</p>
-                      <p className="text-sm text-muted-foreground">
-                        Can view, comment and edit.
-                      </p>
-                    </CommandItem>
-                    <CommandItem className="teamaspace-y-1 flex flex-col items-start px-4 py-2">
-                      <p>Billing</p>
-                      <p className="text-sm text-muted-foreground">
-                        Can view, comment and manage billing.
-                      </p>
-                    </CommandItem>
-                    <CommandItem className="teamaspace-y-1 flex flex-col items-start px-4 py-2">
-                      <p>Owner</p>
-                      <p className="text-sm text-muted-foreground">
-                        Admin-level access to all resources.
-                      </p>
+                      </Link>
                     </CommandItem>
                   </CommandGroup>
                 </CommandList>
@@ -72,14 +55,14 @@ export async function LatestMembers() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>New Admission</CardTitle>
+        <CardTitle>New Members</CardTitle>
         <CardDescription>
-          All students who add course
+          All members who have joined
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
           {
-            users.map((user) => <UserItems {...user}/>)
+            users.map((user,id) => <UserItems key={id} {...user}/>)
           }
       </CardContent>
     </Card>
