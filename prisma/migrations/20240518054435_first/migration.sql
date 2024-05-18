@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE `Course` (
     `id` VARCHAR(191) NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
     `title` TEXT NOT NULL,
     `description` TEXT NULL,
     `imageUrl` TEXT NULL,
@@ -8,7 +9,7 @@ CREATE TABLE `Course` (
     `isPublished` BOOLEAN NOT NULL DEFAULT false,
     `categoryId` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updateAt` DATETIME(3) NOT NULL,
+    `updatedAt` DATETIME(3) NOT NULL,
 
     INDEX `Course_categoryId_idx`(`categoryId`),
     FULLTEXT INDEX `Course_title_idx`(`title`),

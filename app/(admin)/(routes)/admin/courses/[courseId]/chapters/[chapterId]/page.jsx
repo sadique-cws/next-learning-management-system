@@ -26,7 +26,7 @@ const page = async ({ params }) => {
             courseId: params.courseId,
         },
         include: {
-            maxData: true
+            $scalars: true
         },
     })
 
