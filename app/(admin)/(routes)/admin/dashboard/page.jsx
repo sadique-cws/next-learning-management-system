@@ -7,10 +7,16 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { getTotalPaymentAmount } from "@/actions/get-purchase";
+import { formatPrice } from "@/lib/format";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
+import { DataCard } from "@/components/data-card";
 
 
-const page = () => {
+const page = async () => {
+
+  const total = await getTotalPaymentAmount();
   return (
     <div className='flex flex-col gap-4'>
       <div className="flex justify-between flex-1 items-center">
@@ -27,40 +33,20 @@ const page = () => {
         </Breadcrumb>
         <div className=''>
 
-      </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        <Card className="bg-emerald-600 text-white">
-            <CardContent className="p-5">
-              <CardTitle>10+</CardTitle>
-              <CardDescription className="text-white">Total Students</CardDescription>
-            </CardContent>
-        </Card>
-        <Card className="bg-yellow-600 text-white">
-            <CardContent className="p-5">
-              <CardTitle>10+</CardTitle>
-              <CardDescription className="text-white">Total Courses</CardDescription>
-            </CardContent>
-        </Card>
-        <Card className="bg-sky-600 text-white">
-            <CardContent className="p-5">
-              <CardTitle>10+</CardTitle>
-              <CardDescription className="text-white">Total Users</CardDescription>
-            </CardContent>
-        </Card>
-        <Card className="bg-red-600 text-white">
-            <CardContent className="p-5">
-              <CardTitle>10+</CardTitle>
-              <CardDescription className="text-white">Total Payments</CardDescription>
-            </CardContent>
-        </Card>
-        
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 ">
+
+        <DataCard label="Total Members" value={3} />
+        <DataCard label="Total Courses" value={3} />
+        <DataCard label="Total Chapters" value={3} />
+        <DataCard label="Total Payments" value={total} shouldFormat/>
+
       </div>
-      
+
       <div className='grid grid-cols-2 gap-3'>
-          <LatestMembers/>
-          <LatestMembers/>
+        <LatestMembers />
       </div>
     </div>
   )

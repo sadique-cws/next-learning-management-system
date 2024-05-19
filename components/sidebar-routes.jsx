@@ -24,11 +24,6 @@ const teacherRoutes = [
         href: "/admin/dashboard",
     },
     {
-        icon: GraduationCap,
-        label: "Admissions",
-        href: "/admin/admissions",
-    },
-    {
         icon: IndianRupeeIcon,
         label: "Payments",
         href: "/admin/payments",
