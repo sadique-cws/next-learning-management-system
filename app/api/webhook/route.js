@@ -3,11 +3,10 @@ import { stripe } from "@/lib/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-import Stripe from "stripe";
 
 export async function POST(req) {
     const body = await req.text();
-    const signature = headers().get("Stripe-Signature");
+    const signature = headers().get('Stripe-Signature');
 
     let event;
 
@@ -27,7 +26,7 @@ export async function POST(req) {
     const userId = session?.metadata?.userId;
     const courseId = session?.metadata?.courseId;
 
-    if (event.type === "checkout.session.completed") {
+    if (event.type === 'checkout.session.completed') {
         if (!userId || !courseId) {
             return new NextResponse(`Webhook Error: Missing metadata`, {
                 status: 400,

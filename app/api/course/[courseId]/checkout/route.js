@@ -3,88 +3,101 @@ import { stripe } from "@/lib/stripe";
 import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
-export async function POST(req, {params}){
-    try{
+
+export async function POST(
+    req,
+    { params }
+) {
+    try {
         const user = await currentUser();
 
-        if(!user || !user.id || !user.emailAddresses?.[0]?.emailAddress ){
-            return new NextResponse("Unauthenticated", {status: 401}); 
+        if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
+            return new NextResponse("Unauthorized", { status: 401 });
         }
 
         const course = await db.course.findUnique({
-            where:{
-                id:params.courseId,
-                isPublished : true
-            }
-        })
+            where: {
+                id: params.courseId,
+                isPublished: true,
+            },
+        });
 
         const purchase = await db.purchase.findUnique({
-            where:{
-                userId_courseId:{
+            where: {
+                userId_courseId: {
                     userId: user.id,
                     courseId: params.courseId,
-                }
-            }
-        })
-
-        if(purchase){
-            return new NextResponse("Course already purchased", {status:400});
-        }
-
-        if(!course){
-            return new NextResponse("Course not found", {status:404});
-        }
-
-        const line_items = {
-            quantity: 1,
-            price_data:{
-                currency:"INR",
-                product_data:{
-                    name:course.title,
-                    description: course.description
                 },
-                unit_amount: Math.round(course.price * 100),
-            } 
+            },
+        });
+
+        if (purchase) {
+            return new NextResponse("Already purchased", { status: 400 });
         }
 
+        if (!course) {
+            return new NextResponse("Not found", { status: 404 });
+        }
+
+        const line_items = [
+            {
+                quantity: 1,
+                price_data: {
+                    currency: "INR",
+                    product_data: {
+                        name: course.title,
+                        description: course.description,
+                    },
+                    unit_amount: Math.round(course.price * 100),
+                },
+            },
+        ];
+
+        /*
+			Check if user already has a record in the StripeCustomer
+			table, if not which means it's first time for our user to
+			purchase a course in our platform, create one with his
+			first email address in the stripe and in the StripeCustomer
+			table
+		*/
         let stripeCustomer = await db.stripeCustomer.findUnique({
-            where:{
+            where: {
                 userId: user.id,
             },
-            select:{
-                stripeCustomerId:true,
-            }
-        })
+            select: {
+                stripeCustomerId: true,
+            },
+        });
 
-        if(!stripeCustomer){
+        if (!stripeCustomer) {
             const customer = await stripe.customers.create({
-                email: user.emailAddresses[0].emailAddress
-            })
+                email: user.emailAddresses[0].emailAddress,
+            });
 
-            const stripeCustomer = await db.stripeCustomer.create({
-                data:{
+            stripeCustomer = await db.stripeCustomer.create({
+                data: {
                     userId: user.id,
                     stripeCustomerId: customer.id,
-                }
-            })
+                },
+            });
         }
 
+       
         const session = await stripe.checkout.sessions.create({
             customer: stripeCustomer.stripeCustomerId,
-            line_items: [line_items],
+            line_items,
             mode: "payment",
             success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
             cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?canceled=1`,
             metadata: {
                 courseId: course.id,
                 userId: user.id,
-            }
-        })
+            },
+        });
 
-        return NextResponse.json({url:session.url})
-    }
-    catch(error){
-        console.log("COURSE ID CHECKOUT", error.message);
-        return new NextResponse("Internal Error", {status:500});
+        return NextResponse.json({ url: session.url });
+    } catch (error) {
+        console.log("[COURSE_ID_CHECKOUT]", error);
+        return new NextResponse("Internal Error", { status: 500 });
     }
 }
