@@ -1,4 +1,4 @@
-import { isAdmin } from "@/lib/admin";
+import { isTeacher } from "@/lib/teacher";
 import AdminNavbar from "./_components/admin-navbar";
 import AdminSidebar from "./_components/admin-sidebar";
 import { auth } from "@clerk/nextjs";
@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export default function AdminLayout({children}){
     const { userId } = auth();
 
-    if (!isAdmin(userId)) {
+    if (!isTeacher(userId)) {
         return redirect("/");
     }
     return (
