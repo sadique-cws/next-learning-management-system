@@ -96,7 +96,7 @@ const CategoryForm = ({initialData, courseId, options}) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                   <Combobox options={...options} {...field}/>
+                   <Combobox {...field} options={options} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

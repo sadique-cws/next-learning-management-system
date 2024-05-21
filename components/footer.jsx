@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className='bg-slate-100 w-full h-auto'>
         <div className="flex">
-            <Image src="/cws.png" width={150} height={130}/>
+            <Image src="/cws.png" alt="footer logo" width={150} height={130}/>
         </div>
     </div>
   )
