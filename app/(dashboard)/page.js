@@ -4,6 +4,9 @@ import FactContainer from "./_components/fact-container";
 import { Categories } from "./(routes)/learn/_components/categories";
 import Image from "next/image";
 import { getCourses } from "@/actions/get-courses";
+import { auth } from "@clerk/nextjs";
+import { db } from "@/lib/db";
+import CoursesList from "@/components/courses-list";
 
 export default async function Home({searchParams}) {
   const {userId} = auth();
