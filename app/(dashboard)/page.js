@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import FactContainer from "./_components/fact-container";
 import { Categories } from "./(routes)/learn/_components/categories";
 import Image from "next/image";
+import { getCourses } from "@/actions/get-courses";
 
 export default async function Home({searchParams}) {
   const {userId} = auth();
@@ -14,7 +15,6 @@ export default async function Home({searchParams}) {
 
   const courses = await getCourses({userId, ...searchParams})
 
-export default function Home() {
   return (
       <>
       <Card className="border-0 bg-slate-200 flex flex-1 gap-4 md:p-10 p-2 min-h-[400px] rounded-none items-center"> 
