@@ -1,27 +1,24 @@
 "use client"
 
 import {
-    FcOldTimeCamera,
     FcMultipleDevices,
-    FcSalesPerformance,
-    FcSportsMode,
     FcEngineering,
     FcDatabase,
-    FcPhoneAndroid,
-    FcFlowChart,
-    FcDeployment,
-    FcPrivacy
+    FcAndroidOs,
+    FcIdea,
+    FcSteam,
+    FcGlobe
 } from "react-icons/fc"
 import { CategoryItem } from "./category-item"
 
 const IconMap =  {
-    "Database" : FcDatabase,
-    "Android Dev" : FcPhoneAndroid,
-    "Web Designing": FcDeployment,
-    "Backend Dev" : FcFlowChart,
-    "Frontend Dev" : FcMultipleDevices,
-    "Computer Science" : FcEngineering,
-    "Cyber Security" : FcPrivacy,
+    "Web Designing" :FcGlobe,
+    "Android Development" :FcAndroidOs,
+    "Backend Development" :FcIdea,
+    "Frontend Development" :FcMultipleDevices,
+    "Computer Fundamental" :FcSteam,
+    "Data Structure" :FcEngineering,
+    "Database" :FcDatabase,
 }
 export const Categories = ({items}) => {
     return (
