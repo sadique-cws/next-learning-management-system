@@ -38,11 +38,7 @@ const teacherRoutes = [
         label: "Analytics",
         href: "/admin/analytics",
     },
-    {
-        icon: Users,
-        label: "Manage Users",
-        href: "/admin/users",
-    }
+    
 ]
 
 

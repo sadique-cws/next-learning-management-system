@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import FactContainer from "./_components/fact-container";
 import { Categories } from "./(routes)/learn/_components/categories";
+import Image from "next/image";
 
 export default async function Home({searchParams}) {
   const {userId} = auth();
@@ -31,6 +32,9 @@ export default async function Home({searchParams}) {
                      <CardDescription>Unlock your potential by signing up with CWS - The most affordable learning Solution</CardDescription>
                      <Button size="lg">Start Learning</Button>
                 </div>
+                <div className="md:w-8/12 flex">
+                    {/* <Image width={200} height={200} src={`/banner.png`}/> */}
+                </div>
           </CardContent>
       </Card>
       <FactContainer/>
@@ -38,6 +42,7 @@ export default async function Home({searchParams}) {
             <Categories items={category}/>
             <br/>
             <CoursesList items={courses}/>
+            
         </div>
       </>
   );

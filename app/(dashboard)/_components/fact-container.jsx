@@ -24,7 +24,7 @@ const FactContainer = () => {
             <div className="flex flex-col items-center">
                 <FcApproval className='w-16 h-16 text-red-600 mb-3'/>
                 <h3 className='text-gray-700 font-semibold'>500+</h3>
-                <h4 className='text-gray-700'>Placements last Year</h4>
+                <h4 className='text-gray-700'>Student's Placements</h4>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { clerkClient } from "@clerk/nextjs"
 import { ChevronDown } from "lucide-react"
@@ -53,7 +53,7 @@ export async function LatestMembers() {
 
 
   return (
-    <Card>
+    <Card className="max-h-[500px] overflow-auto">
       <CardHeader>
         <CardTitle>New Members</CardTitle>
         <CardDescription>

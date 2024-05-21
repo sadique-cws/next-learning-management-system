@@ -62,7 +62,12 @@ const NavbarRoutes = () => {
                 Admin Panel
               </Button>
             </Link>
-          ) : null
+          ) : (<Link href="/dashboard">
+          <Button size="sm" variant="ghost">
+            <User className='w-4 h-4 mr-2' />
+            My Learning
+          </Button>
+        </Link>)
         }
             <UserButton afterSignOutUrl="/" />
             

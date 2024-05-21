@@ -6,6 +6,7 @@ import { formatPrice } from "@/lib/format";
 export const columns = [
     {
         accessorKey: "user.name",
+        id:"fullname",
         header: ({ column }) => {
             return (
                 <Button

@@ -8,9 +8,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import { getTotalPaymentAmount } from "@/actions/get-purchase";
-import { formatPrice } from "@/lib/format";
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
 import { DataCard } from "@/components/data-card";
 
 
