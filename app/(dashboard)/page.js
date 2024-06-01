@@ -48,7 +48,7 @@ export default async function Home({ searchParams }) {
             </div>
             <div className="w-full p-[5%]">
                 <div className="flex-1 flex justify-center">
-                    <h2 className="text-3xl text-slate-700 font-semibold mb-4 border-b pb-1 border-slate-300">Cwsian's</h2>
+                    <h2 className="text-3xl text-slate-700 font-semibold mb-4 border-b pb-1 border-slate-300">Cwsian&apos;s</h2>
                 </div>
             <Achievements/>
             </div>
