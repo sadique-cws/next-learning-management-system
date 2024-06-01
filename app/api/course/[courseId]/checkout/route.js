@@ -1,6 +1,6 @@
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
-import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 
@@ -9,9 +9,11 @@ export async function POST(
     { params }
 ) {
     try {
-        const user = await currentUser();
+        let userData = await auth();
+        let user = userData.user;
 
-        if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
+
+        if (!user || !user.id || !user.email) {
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
@@ -71,7 +73,7 @@ export async function POST(
 
         if (!stripeCustomer) {
             const customer = await stripe.customers.create({
-                email: user.emailAddresses[0].emailAddress,
+                email: user.email,
             });
 
             stripeCustomer = await db.stripeCustomer.create({

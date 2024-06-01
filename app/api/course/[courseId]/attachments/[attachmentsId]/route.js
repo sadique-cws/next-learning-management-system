@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 import { UTApi } from "uploadthing/server";
 

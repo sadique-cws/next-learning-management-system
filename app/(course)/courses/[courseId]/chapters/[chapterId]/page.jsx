@@ -1,6 +1,5 @@
 import { getChapter } from "@/actions/get-chapter";
 import Banner from "@/components/banner";
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { VideoPlayer } from "./_components/video-player";
 import { Separator } from "@/components/ui/separator";
@@ -8,10 +7,11 @@ import Preview from "@/components/preview";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
 import { File } from "lucide-react";
 import { CourseProgressButton } from "./_components/course-progress-button";
+import { auth } from "@/auth";
 
 const ChapterIdPage = async ({ params }) => {
 
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) return redirect("/");
 
@@ -39,12 +39,13 @@ const ChapterIdPage = async ({ params }) => {
   const completedOnEnd = !!purchase && !userProgress?.isCompleted;
 
   return (
-    <div>
+    <div className="flex-10">
       {userProgress?.isCompleted && (
         <Banner
           variant="success"
           label="You already completed this chapter."
         />
+        
       )}
       {isLocked && (
         <Banner
@@ -64,7 +65,7 @@ const ChapterIdPage = async ({ params }) => {
             completeOnEnd={completedOnEnd}
           />
         </div>
-        <div>
+        <div className="flex-1">
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">
               {chapter.title}

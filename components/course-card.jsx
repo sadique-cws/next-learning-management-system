@@ -11,7 +11,7 @@ const CourseCard = ({ id,title,imageUrl,chaptersLength,price,progress,category})
     <Link href={`/courses/${id}`}>
         <div className='group hover:shadow-sm transition overflow-hidden border h-full'>
             <div className='relative w-full aspect-video overflow-hidden'>
-                <Image fill className='object-cover' alt={title} src={imageUrl} />
+                <Image width={0} height={0} sizes='100vw' alt={title} style={{width:"100%",height:"auto"}} className='object-cover' src={imageUrl} />
             </div>
             <div className='flex flex-col p-4'>
                 <div className='text-lg md:text-base font-medium group-hover:text-sky-700  transition line-clamp-2'>

@@ -34,7 +34,6 @@ const ChapterTitleForm = ({initialData, courseId, chapterId}) => {
     const onSubmit = async(values) => {
         try{
             let data = await axios.patch(`/api/course/${courseId}/chapters/${chapterId}`, values)
-            console.log(data);
             toast.success("Chapter updated");
             toggleEdit();
             router.refresh();

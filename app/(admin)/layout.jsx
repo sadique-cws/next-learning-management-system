@@ -1,12 +1,12 @@
 import { isTeacher } from "@/lib/teacher";
 import AdminNavbar from "./_components/admin-navbar";
 import AdminSidebar from "./_components/admin-sidebar";
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 
-export default function AdminLayout({children}){
-    const { userId } = auth();
-
+export default async function AdminLayout({children}){
+    const session = await auth();
+    const {userId} = session;
     if (!isTeacher(userId)) {
         return redirect("/");
     }

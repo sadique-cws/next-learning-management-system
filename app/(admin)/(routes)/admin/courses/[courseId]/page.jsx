@@ -2,7 +2,6 @@ import { IconBadge } from '@/components/icon-badge'
 import { File, IndianRupeeIcon, LayoutDashboard, ListChecks } from 'lucide-react'
 import React from 'react'
 import TitleForm from './_components/title-form'
-import { auth } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 import { db } from '@/lib/db'
 import CategoryForm from './_components/category-form'
@@ -13,10 +12,11 @@ import { AttachmentForm } from './_components/attachments-form'
 import { ChaptersForm } from './_components/chapter-form'
 import Banner from '@/components/banner'
 import { Actions } from './_components/actions'
+import { auth } from '@/auth'
 
 const page = async ({ params }) => {
 
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) return redirect("/");
 

@@ -4,21 +4,21 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Command, CommandGroup, CommandItem, CommandList } from "@/components/ui/command"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { clerkClient } from "@clerk/nextjs"
+import { db } from "@/lib/db"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 
 
-const UserItems = ({imageUrl,firstName, lastName, emailAddresses}) => (
+const UserItems = ({image,name, email}) => (
   <div className="flex items-center justify-between space-x-4">
           <div className="flex items-center space-x-4">
             <Avatar>
-              <AvatarImage src={imageUrl} />
+              <AvatarImage src={image} />
               <AvatarFallback>OM</AvatarFallback>
             </Avatar>
             <div>
-              <p className="text-sm font-medium leading-none">{firstName + " " + lastName}</p>
-              <p className="text-sm text-muted-foreground">{emailAddresses[0].emailAddress}</p>
+              <p className="text-sm font-medium leading-none">{name}</p>
+              <p className="text-sm text-muted-foreground">{email}</p>
             </div>
           </div>
           <Popover>
@@ -49,7 +49,7 @@ const UserItems = ({imageUrl,firstName, lastName, emailAddresses}) => (
 )
 
 export async function LatestMembers() {
-  let users = await clerkClient.users.getUserList();
+  let users = await db.user.findMany();
 
 
   return (

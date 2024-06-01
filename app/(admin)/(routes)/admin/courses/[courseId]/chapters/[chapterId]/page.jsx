@@ -1,6 +1,6 @@
 import { IconBadge } from '@/components/icon-badge';
 import { db } from '@/lib/db';
-import { auth } from '@clerk/nextjs'
+import { auth } from '@/auth'
 import { Eye, LayoutDashboard, MoveLeft, Video } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -14,7 +14,7 @@ import { ChapterActions } from './_components/chapter-actions';
 
 const page = async ({ params }) => {
 
-    const { userId } = auth();
+    const {userId} = await auth();
 
     if (!userId) {
         return redirect("/");

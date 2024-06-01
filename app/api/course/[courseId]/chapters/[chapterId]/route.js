@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 import Mux from "@mux/mux-node";
 
@@ -13,7 +13,7 @@ const mux = new Mux(
 
 export async function DELETE(req,{params}){
     try{
-        const {userId} = auth();
+        const {userId} = await auth();
         if(!userId) return new NextResponse("unauthorized",{status:401});
         
         const course = await db.course.findUnique({
@@ -88,7 +88,7 @@ export async function DELETE(req,{params}){
 
 export async function PATCH(req, { params }) {
     try {
-        const { userId } = auth();
+        const {userId} = await auth();
 
         /* 
             This req body will came from a patch req from different components 

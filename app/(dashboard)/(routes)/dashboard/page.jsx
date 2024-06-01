@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
 import { CheckCircle, Clock } from "lucide-react";

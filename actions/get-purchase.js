@@ -1,5 +1,4 @@
 import { db } from "@/lib/db"
-import { clerkClient } from "@clerk/clerk-sdk-node"
 
 export const getPurchase = async () => {
     const purchases = await db.purchase.findMany({
@@ -15,15 +14,19 @@ export const getPurchase = async () => {
         const userId = purchase.userId;
 
         // Fetch user details from Clerk
-        const user = await clerkClient.users.getUser(userId);
+        const user = await db.User.findUnique({
+            where:{
+                id:userId
+            }
+        });
 
         // Create an enhanced purchase object with user details
         const enhancedPurchase = {
             ...purchase,
             user: {
                 id: user.id,
-                name: user.fullName || `${user.firstName} ${user.lastName}`,
-                email: user.emailAddresses[0].emailAddress,
+                name: user.name,
+                email: user.email,
             },
         };
 

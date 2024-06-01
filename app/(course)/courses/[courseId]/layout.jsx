@@ -1,17 +1,16 @@
 import { getProgress } from "@/actions/get-progress";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { CourseNavbar } from "./_components/course-navbar";
 import { CourseSidebar } from "./_components/course-sidebar";
+import { auth } from "@/auth";
 
 const CourseLayout = async ({children, params}) => {
-
-    const {userId} = auth();
-
-    if(!userId) return redirect("/");
-
-    const course = await db.course.findUnique({
+    let session, course,progressCount;
+    try{
+     session = await auth();
+    const {userId} = session;   
+     course = await db.course.findUnique({
         where:{
             id:params.courseId,
         },
@@ -33,10 +32,18 @@ const CourseLayout = async ({children, params}) => {
             }
         }
     });
-
     if(!course) return redirect('/');
+     progressCount = await getProgress(userId, course.id);
 
-    const progressCount = await getProgress(userId, course.id);
+    }
+    catch(e){
+        session = {userId:null};
+    }
+    finally{
+        if(!session.user) return redirect("/");
+    }
+   
+  
 
 
     return (

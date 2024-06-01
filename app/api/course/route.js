@@ -1,10 +1,10 @@
+import { auth } from "@/auth";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 export const POST = async (req) => {
     try{
-        const {userId} = auth();
+        const {userId} = await auth();
         const {title} = await req.json();
 
         if(!userId){
@@ -14,7 +14,8 @@ export const POST = async (req) => {
         const course = await db.course.create({
             data: {
                 title: title,
-                userId
+                userId,
+                updatedAt:new Date(),
             }
         })
 

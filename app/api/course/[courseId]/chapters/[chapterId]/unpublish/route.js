@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
 export async function PATCH(
@@ -10,7 +10,7 @@ export async function PATCH(
         /* 
 			Check if there's a logged in user (authentication)
 		*/
-        const { userId } = auth();
+        const {userId} = await auth();
 
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 });

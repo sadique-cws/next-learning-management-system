@@ -1,10 +1,10 @@
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
 export async function PUT(req,{ params }) {
     try {
-        const { userId } = auth();
+        const {userId} = await auth();
 
         /* 
 			Check if there's a logged in user (authentication)
