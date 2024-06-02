@@ -1,7 +1,6 @@
 datasource db {
  provider  = "postgresql"
   url  	    = env("DATABASE_URL")
-  relationMode = "prisma"
 }
 
 // We added the previewFeatures array at the 7:40:40 of the video. T
